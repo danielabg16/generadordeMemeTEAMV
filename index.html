@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Edita tus memes y descárgate tus creaciones con esta aplicación">
+  <title>Editor de memes</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <script src="https://kit.fontawesome.com/dac9c574a1.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="estilos.css" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js" integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js" integrity="sha512-01CJ9/g7e8cUmY0DFTMcUw/ikS799FHiOA0eyHsUWfOetgbx/t6oV4otQ5zXKQyIrQGTHSmRVPIgrgLcZi/WMA==" crossorigin="anonymous"></script>
+  <script src="app.js"></script>
+</head>
+
+<body class="modo-oscuro">
+ <!--header-->
+  <header>
+    <h1 tabindex="0" class="app-title" aria-label="Titulo Generador de Memes">Generador de Memes</h1>
+    <div tabindex="0" class="buttons-container panel-buttons">
+      <button tabindex="0" aria-labelledby="Panel de Imagen" class="button button-text" id="panel-img-button"><i class="fas fa-file-image button-icon-text"
+          aria-hidden="true"></i>Imagen</button>
+      <button tabindex="0" aria-labelledby="Panel de texto" class="button button-text" id="text-panel-button"><i class="fas fa-font button-icon-text"
+          aria-hidden="true"></i>Texto</button>
+        <button tabindex="0" aria-label="Cambiar a modo Oscuro" class="button button-text button-theme button-theme-dark" id="modo-oscuro-button" aria-labelledby="Cambiar a modo oscuro">
+            <i class="far fa-lightbulb button-icon-text" aria-hidden="true"></i>Modo oscuro
+          </button>
+          <button tabindex="0" aria-label="Cambiar a modo Claro"class="button button-text button-theme button-theme-light" id="modo-claro-button" aria-labelledby="Cambair a modo claro">
+            <i class="fas fa-lightbulb button-icon-text" aria-hidden="true"></i>Modo claro
+          </button>
+    </div>
+  </header>
+
+   <div id="meme-gallery" class="oculto">
+        <div id="close-gallery">X</div>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img class="gallery-image" src="https://as01.epimg.net/epik/imagenes/2021/01/11/portada/1610380987_204647_1610381073_noticia_normal.jpg" alt="" >
+                </div>
+                <div class="gallery-item"><img class="gallery-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7mosrjxwF7MMhJFImYvQyLSfhrv7ss8XL5g&usqp=CAU" alt="" >
+                </div>
+                <div class="gallery-item"><img class="gallery-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS60ukZH7oOo-jLTzlaoHvh70lHik_5UmF1Ag&usqp=CAU" alt="" >
+                </div>
+                <div class="gallery-item"><img class="gallery-image" src="https://i.ytimg.com/vi/IBGzEd4vlMM/maxresdefault.jpg" alt="" >
+                </div>
+                <div class="gallery-item"><img class="gallery-image" src="https://www.dexerto.es/wp-content/uploads/sites/3/2021/01/Que-es-Dogecoin-La-criptomoneda-respaldada-por-influencers-que-domina-las-redes-sociales.jpg" alt="" >
+                </div>
+                <div class="gallery-item"><img class="gallery-image" src="https://i2.wp.com/criptotendencia.com/wp-content/uploads/2021/05/Elon-Musk-empieza-a-trabajar-con-desarrolladores-de-Dogecoin.jpg?fit=1200%2C667&ssl=1" alt="" >
+                </div>
+                <div class="gallery-item"><img class="gallery-image" src="https://mk0criptonoticijjgfa.kinstacdn.com/wp-content/uploads/2021/02/dogecoin-tokens-blockchain-ethereum.jpg" alt="" >
+                </div>
+                <div class="gallery-item"><img class="gallery-image" src="https://ichef.bbci.co.uk/news/1024/branded_news/7CC2/production/_118283913_29xp-meme-mobilemasterat3x-v3.jpg" alt="" >
+                </div>
+                <div class="gallery-item"><img class="gallery-image" src="https://assets.entrepreneur.com/content/3x2/2000/20180706133830-meme.jpeg?width=700&crop=2:1" alt="" >
+                </div>
+                <div class="gallery-item"><img class="gallery-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1CZ1HX37vIahs4ZRczNLCYDn9haaUMy2Dhg&usqp=CAU" alt="" >
+                </div>
+            </div>
+</div>
+
+
+  <div class="editor-container">
+    <!--
+      MEME CANVAS
+    -->
+    <main tabindex="0" class="meme-container" aria-label="contenedor canvas">
+      <div tabindex="0" class="canvas-imagen" id="canvas-imagen" aria-label="canvas editor de memes">
+        <p tabindex="0"id="texto-superior" class="text-meme">Texto superior</p>
+        <div src="" alt="" id="imagen-de-meme" aria-label="Imagen de meme"></div>
+        <p tabindex="0" id="bottom-text" class="text-meme">Texto inferior</p>
+        <p class="powered">Realizado por TEAM V</p>
+
+      </div>
+      <button tabindex="0" type="button" class="button button-donwload button-text disabled-button" id="descargar-meme" aria-labelledby="descargar meme"><i class="fas fa-download button-icon-text"
+        aria-hidden="true"></i>Descargar meme</button>
+
+    </main>
+
+    <aside class="panel oculto" id="panel">
+      <button class="panel-close-button" id="panel-close-button" aria-labelledby="Cerrar panel">
+        <i class="fas fa-times" aria-hidden="true"></i>
+      </button>
+      <!--
+        ***************************************************
+                         IMG PANEL
+        ***************************************************
+      -->
+      <section tabindex="0" class="panel-img" id="panel-img"  aria-label="panel de edición de imagen">
+        <h2 class="panel-title">IMAGEN</h2>
+        <div tabindex="0" class="panel-control">
+          <h3 class="panel-control-title">URL</h3>
+          <input type="text" class="panel-control-input" id="url-img-input" aria-label="insertar url">
+        </div>
+
+        <div tabindex="0" class="panel-control" aria-label="galería de imágenes">
+            <h3 class="panel-control-title">Galeria</h3>
+            <button tabindex="0" class="button button-default" id="mostrar-galeria" aria-labelledby="Ver Galería de imágenes">Ver Galeria</button>
+          </div>
+  
+
+        <div tabindex="0" class="panel-control">
+          <h3 class="panel-control-title">FONDO</h3>
+          <div class="panel-control-columns">
+            <div tabindex="0" class="panel-control-color panel-control-column">
+              <input aria-label="mezclar de colores en fondo de imagen" type="color" id="blend-color-input" value="#FFFFFF">
+              <span id="blend-color" aria-hidden="true">Elegi un color</span>
+            </div>
+            <div tabindex="0" class="panel-control-column">
+              <select aria-label="ajuste de niveles en imagen" id="blend-mode-select" class="panel-control-input">
+                <option value="unset">Ninguno</option>
+                <option value="lighten">Aclarar</option>
+                <option value="darken">Oscurecer</option>
+                <option value="difference">Diferencia</option>
+                <option value="luminosity">Luminosidad</option>
+                <option value="multiply">Multiplicar</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <!--
+          -----------------------[ FILTROS ]-----------------------
+        -->
+        <div tabindex="0" class="panel-control" aria-label="Panel de Filtros">
+          <h3 class="panel-control-title">FILTROS</h3>
+          <div tabindex="0" class="panel-control-control">
+            <label  for="brightness-control">BRILLO</label>
+            <input type="range" id="brightness-control" min="0" max="1" value="1" step="0.1">
+          </div>
+          <div tabindex="0"class="panel-control-control">
+            <label for="opacity-control">OPACIDAD</label>
+            <input type="range" id="opacity-control" min="0" max="1" value="1" step="0.1">
+          </div>
+          <div tabindex="0" class="panel-control-control">
+            <label for="contrast-control">CONTRASTE</label>
+            <input type="range" id="contrast-control" min="100" max="1000" value="100">
+          </div>
+          <div tabindex="0" class="panel-control-control">
+            <label for="blur-control">DESENFOQUE</label>
+            <input type="range" id="blur-control" min="0" max="10" value="0" step="0.1">
+          </div>
+          <div tabindex="0" class="panel-control-control">
+            <label for="grayscale-control">ESCALA DE GRISES</label>
+            <input type="range" id="grayscale-control" min="0" max="100" value="0">
+          </div>
+          <div tabindex="0" class="panel-control-control">
+            <label for="sepia-control">SEPIA</label>
+            <input type="range" id="sepia-control" min="0" max="100" value="0">
+          </div>
+          <div tabindex="0" class="panel-control-control">
+            <label for="hue-control">HUE</label>
+            <input type="range" id="hue-control" min="0" max="360" value="0">
+          </div>
+          <div tabindex="0" class="panel-control-control">
+            <label for="saturate-control">SATURADO</label>
+            <input type="range" id="saturate-control" min="100" max="1000" value="100" step="10">
+          </div>
+          <div tabindex="0" class="panel-control-control">
+            <label for="invert-control">NEGATIVO</label>
+            <input type="range" id="invert-control" min="0" max="1" value="0" step="0.1">
+          </div>
+        </div>
+        <button tabindex="0" class="button button-default" id="default-filters-button" aria-label="resetear filtros">Resetear filtros</button>
+      </section>
+      <!--
+        ***************************************************
+                         TEXT PANEL
+        ***************************************************
+      -->
+      <section tabindex="0" class="panel-text oculto" id="panel-text">
+        <h2 class="panel-title">TEXTO</h2>
+        <!--
+          -----------------------[ TEXTO ]-----------------------
+        -->
+        <div tabindex="0" class="panel-control">
+          <h3 class="panel-control-title">SUPERIOR</h3>
+          <textarea aria-label="editar texto superior" class="panel-control-input" id="texto-superior-input">Texto superior</textarea>
+          <div tabindex="0" class="flex-container panel-control-checkbox">
+            <input type="checkbox" id="no-texto-superior-checkbox"><label for="no-texto-superior-checkbox">Sin texto
+              superior</label>
+          </div>
+        </div>
+        <div tabindex="0" class="panel-control">
+          <h3 class="panel-control-title">INFERIOR</h3>
+          <textarea aria-label="Texto Inferior" class="panel-control-input"
+            id="bottom-text-input">BOTTOM TEXT</textarea>
+          <div tabindex="0" class="flex-container panel-control-checkbox">
+            <input type="checkbox" id="no-bottom-text-checkbox"><label for="no-bottom-text-checkbox">Sin texto
+              inferior</label>
+          </div>
+        </div>
+        <!--
+          -----------------------[ FUENTE ]-----------------------
+        -->
+        <div class="panel-control">
+          <h3 class="panel-control-title">FUENTE</h3>
+          <!-- 
+            Familia de fuente
+          -->
+          <select name="Familia de fuente" id="text-font-select" class="panel-control-input" aria-label="Familia de fuente">
+            <option value="Arial">Arial</option>
+            <option value="Arial Black">Arial Black</option>
+            <option value="American Typewriter">American Typewriter</option>
+            <option value="Andale Mono">Andale Mono</option>
+            <option value="Comic Sans MS">Comic Sans MS</option>
+            <option value="Helvetica">Helvetica</option>
+            <option value="Impact" selected>Impact</option>
+            <option value="Verdana">Verdana</option>
+            <option value="Times New Roman">Times New Roman</option>
+          </select>
+          <div class="flex-container">
+            <!-- 
+              Tamaño
+            -->
+            <input type="number" name="Tamaño de fuente" aria-label="Tamaño de fuente" class="panel-control-input" id="text-size-input" min="12"
+              value="40" />
+            <!-- 
+              Alineaci´ón
+            -->
+            <div class="buttons-container buttons-alignment">
+              <button class="button button-default" id="text-left-align-button"
+                aria-label="Alinear texto a la izquierda"><i class="fas fa-align-left" aria-hidden="true"></i></button>
+              <button class="button button-default" id="text-center-align-button"
+                aria-label="Alinear texto al centro"><i class="fas fa-align-center" aria-hidden="true"></i></button>
+              <button class="button button-default" id="text-right-align-button"
+                aria-label="Alineat texto a la derecha"><i class="fas fa-align-right" aria-hidden="true"></i></button>
+            </div>
+          </div>
+        </div>
+        <!--
+          -----------------------[ COLOR ]-----------------------
+        -->
+        <div class="panel-control">
+          <div class="panel-control-columns">
+            <!-- 
+              Color de texto
+             -->
+            <div class="panel-control panel-control-column">
+              <h3 class="panel-control-title">COLOR</h3>
+              <div class="panel-control-color">
+                <input name="Color de texto" type="color" id="text-color-input" value="#000000" aria-label="Color de texto" />
+                <span id="text-color" aria-hidden="true">#000000</span>
+              </div>
+            </div>
+            <!-- 
+              Color de fondo
+             -->
+            <div class="panel-control panel-control-column">
+              <h3 class="panel-control-title">FONDO</h3>
+              <div class="panel-control-color">
+                <input name="Color de fondo de texto" type="color" id="text-background-color-input" value="#FFFFFF" aria-label="Color de fondo de texto" />
+                <span id="text-background-color" aria-hidden="true">#FFFFFF</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex-container panel-control-checkbox">
+            <input type="checkbox" id="text-no-background-checkbox"><label for="text-no-background-checkbox">Fondo
+              transparente</label>
+          </div>
+        </div>
+        <!--
+          -----------------------[ CONTORNO ]-----------------------
+        -->
+        <div class="panel-control">
+          <h3 class="panel-control-title">CONTORNO</h3>
+          <div class="buttons-container">
+            <button class="button button-default" id="no-outline-button">Ninguno</button>
+            <button class="button button-default" id="light-outline-button">Claro</button>
+            <button class="button button-default" id="dark-outline-button">Oscuro</button>
+          </div>
+        </div>
+        <!--
+          -----------------------[ PADDING ]-----------------------
+        -->
+        <div class="panel-control">
+          <h3 class="panel-control-title">ESPACIADO</h3>
+          <input type="number" id="padding-input" class="panel-control-input" aria-label="Espaciado" min="10" max="50"
+            value="35">
+        </div>
+        <!--
+          -----------------------[ ALTO DE LINEA ]-----------------------
+        -->
+        <div class="panel-control">
+          <h3 class="panel-control-title">INTERLINEADO</h3>
+          <select id="line-height-input" class="panel-control-input" aria-label="Interlineado">
+            <option value="0.8">0.8</option>
+            <option value="1">1</option>
+            <option value="1.2" selected>1.2</option>
+            <option value="1.5">1.5</option>
+            <option value="2">2</option>
+            <option value="2.5">2.5</option>
+          </select>
+        </div>
+      </section>
+  </div>
+  </aside>
+</body>
+
+</html>
